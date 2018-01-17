@@ -1,5 +1,84 @@
 const express = require("express");
 const app = express();
+const bodyParser=require('body-parser');
+const jsonParser=bodyParser.json();
+const mongoose=require('mongoose');
+
+mongoose.Promise=global.Promise;
 
 app.use(express.static('public'));
-app.listen(process.env.PORT || 8080);
+app.use(jsonParser);
+
+const {PORT, DATABASE_URL} = require('./config');
+const Character=require('./models')
+
+app.get("/",(req, res)=>{
+	
+	res.sendFile(__dirname+'/characterSheets/index.html');
+});
+
+app.post("/characterSheets", jsonParser, (req, res)=>{
+	Character
+		.create({
+			name: req.body.name, 
+			class: req.body.class, 
+			race: req.body.race, 
+			level: req.body.level
+		})
+		.then(character=> res.status(201).json(character))
+		.catch(err=>{
+			console.error(err);
+			res.status(500).json({message: 'internal server error'});
+		});
+});
+
+app.get('/characterSheets/:id', (req, res)=>{
+	Character
+		.findById(req.params.id)
+		.then(character => res.json(character.serialize()))
+		.catch(err=>{
+			console.error(err);
+			res.status(500).json({message:'internal server error'});
+		})
+})
+
+let server;
+
+function runServer(databaseUrl, port=PORT){
+	return new Promise((resolve, reject)=>{
+		mongoose.connect(databaseUrl, {useMongoClient: true}, err=>{
+			if (err){
+				return reject(err);
+			}
+			server=app.listen(port,()=>{
+				console.log(`your app is listening on port ${port}`);
+				resolve();
+			})
+			.on('error', err=>{
+				mongoose.disconnect();
+				reject(err);
+			});
+		});
+	});
+}
+
+function closeServer() {
+  return mongoose.disconnect().then(() => {
+    return new Promise((resolve, reject) => {
+      console.log('Closing server');
+      server.close(err => {
+        if (err) {
+          return reject(err);
+        }
+        resolve();
+      });
+    });
+  });
+}
+
+if (require.main === module) {
+  runServer(DATABASE_URL).catch(err => console.error(err));
+}
+
+module.exports = { app, runServer, closeServer };
+
