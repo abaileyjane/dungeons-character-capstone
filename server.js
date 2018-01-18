@@ -2,6 +2,7 @@ const express = require("express");
 const app = express();
 const bodyParser=require('body-parser');
 const jsonParser=bodyParser.json();
+const formParser= bodyParser.urlencoded({extended: false});
 const mongoose=require('mongoose');
 
 mongoose.Promise=global.Promise;
@@ -9,15 +10,21 @@ mongoose.Promise=global.Promise;
 app.use(express.static('public'));
 app.use(jsonParser);
 
+console.log("THIS IS JSON PARSER", jsonParser);
+
 const {PORT, DATABASE_URL} = require('./config');
-const Character=require('./models')
+const {Character}=require('./models')
 
 app.get("/",(req, res)=>{
 	
 	res.sendFile(__dirname+'/characterSheets/index.html');
 });
 
-app.post("/characterSheets", jsonParser, (req, res)=>{
+app.post("/characterSheets", formParser, (req, res)=>{
+	// let newCharacter = document.getElementById('newCharacter');
+	// let formData = new FormData(newCharacter);
+	// console.log(formData);
+	console.log("this is the BODY", req.body);
 	Character
 		.create({
 			name: req.body.name, 
