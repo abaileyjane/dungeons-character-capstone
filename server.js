@@ -55,17 +55,17 @@ app.post("/characterSheets", formParser, (req, res)=>{
 		});
 });
 
-app.get('/characterSheets/:id', (req, res)=>{
+// app.get('/characterSheets/:id', (req, res)=>{
 
 
-	Character
-		.findById(req.params.id)
-		.then(character => res.json(character.serialize()))
-		.catch(err=>{
-			console.error(err);
-			res.status(500).json({message:'internal server error'});
-		})
-})
+// 	Character
+// 		.findById(req.params.id)
+// 		.then(character => res.json(character.serialize()))
+// 		.catch(err=>{
+// 			console.error(err);
+// 			res.status(500).json({message:'internal server error'});
+// 		})
+// })
 
 app.put('/characterSheets/:id', formParser, (req, res)=>{
 	console.log("put request ran")

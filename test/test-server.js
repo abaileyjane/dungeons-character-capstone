@@ -5,12 +5,15 @@ const mongoose = require('mongoose');
 const faker = require('faker');
 
 const expect = chai.expect;
+const Assertion=chai.Assertion;
 
 chai.use(chaiHttp);
 
 const{Character}=require('../models');
 const{runServer, closeServer, server, app}=require('../server');
 const{TEST_DATABASE_URL,TEST_PORT}=require('../config');
+
+
 
 function tearDownDb(){
   console.warn('Deleting Database');
@@ -60,15 +63,18 @@ describe('API Function', function(){
       return chai.request(app)
       .get('/characterSheets')
        .then(function(res){
-        console.log(res.body.characters[0])
-        expect(res.body.characters).to.be.json;
+        console.log(res)
+        expect(res.body.characters[0]).to.be.a('object');
         expect(res.body.characters).to.have.lengthOf.at.least(1);
         expect(res.body.characters[0]).to.include.keys('name','class','race','level');
         })
         expect(res).to.have.status(201)
       })
+    it('should return one character', function(){
+      
     })
-  describe('Put Requests', function(){
+    })
+  describe('Push Requests', function(){
     it('should create new character on put', function(){
       const newTestChar = {
         name: faker.name.firstName(),
@@ -92,6 +98,47 @@ describe('API Function', function(){
 
         })
 
+    })
+  })
+
+  describe('Put requests', function(){
+    it('should update character', function(){
+      const updatedChar = {
+        name: "new name",
+        class: "new class",
+        level: 8
+      }
+      return Character
+        .findOne()
+        .then(function(character){
+          updatedChar.id=character.id;
+          return chai.request(app)
+          .put(`/characterSheets/${updatedChar.id}`)
+          .send(updatedChar);
+        })
+        .then(function(res){
+          expect(res).to.have.status(204);
+          return Character.findById(updatedChar.id);
+        })
+        .then(function(character){
+          expect(character.name).to.equal(updatedChar.name);
+          expect(character.class).to.equal(updatedChar.class);
+          expect(character.race).to.be.a('string');
+        })
+    })
+  })
+
+  describe('delete endpoint', function(){
+    it('should delete character', function(){
+      return Character
+      .findOne()
+      .then(function(character){
+        return chai.request(app)
+        .delete(`/characterSheets/${character.id}`)
+        .then(function(res){
+          expect(res).to.have.status(204)
+        })
+      })
     })
   })
 	})
