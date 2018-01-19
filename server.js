@@ -40,6 +40,8 @@ app.post("/characterSheets", formParser, (req, res)=>{
 });
 
 app.get('/characterSheets/:id', (req, res)=>{
+
+
 	Character
 		.findById(req.params.id)
 		.then(character => res.json(character.serialize()))
@@ -49,6 +51,29 @@ app.get('/characterSheets/:id', (req, res)=>{
 		})
 })
 
+app.put('/characterSheets/:id', formParser, (req, res)=>{
+	console.log("put request ran")
+	const toUpdate = {};
+  const updateableFields = ['name', 'class', 'race', 'level'];
+
+  updateableFields.forEach(field => {
+    if (field in req.body) {
+      toUpdate[field] = req.body[field];
+    }
+  });
+  console.log("THINGS TO UPDATE",toUpdate);
+	Character
+		.findByIdAndUpdate(req.params.id, {$set: toUpdate})
+		.then(character => res.status(204).end())
+		.catch(err => res.status(500).json({message:'Internal Server Error'}))
+})
+
+app.delete('/characterSheets/:id', (req, res)=>{
+	Character
+		.findByIdAndRemove(req.params.id)
+		.then(character=>res.status(204).end())
+		.catch(err=>res.status(500).json({message: 'Internal Server Error'}))
+})
 let server;
 
 function runServer(databaseUrl, port=PORT){
