@@ -10,14 +10,29 @@ mongoose.Promise=global.Promise;
 app.use(express.static('public'));
 app.use(jsonParser);
 
-console.log("THIS IS JSON PARSER", jsonParser);
-
 const {PORT, DATABASE_URL} = require('./config');
 const {Character}=require('./models')
 
 app.get("/",(req, res)=>{
-	
+	console.log(res);
 	res.sendFile(__dirname+'/characterSheets/index.html');
+
+});
+
+app.get('/characterSheets', (req,res) =>{
+	Character
+		.find()
+		.then(characters=>{
+			res.json({
+				characters: characters.map(
+					(character)=>character.serialize())
+			});
+		})
+		.catch(err=> {
+			console.error(err);
+			res.status(500).json({message:'Internal Server Error'})
+		});
+
 });
 
 app.post("/characterSheets", formParser, (req, res)=>{
