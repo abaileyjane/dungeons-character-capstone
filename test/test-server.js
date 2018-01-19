@@ -9,7 +9,7 @@ const expect = chai.expect;
 chai.use(chaiHttp);
 
 const{Character}=require('../models');
-const{runServer, closeServer}=require('../server');
+const{runServer, closeServer, server, app}=require('../server');
 const{TEST_DATABASE_URL,TEST_PORT}=require('../config');
 
 function tearDownDb(){
@@ -27,14 +27,14 @@ function seedCharacterData(){
       name: faker.name.firstName,
       class: faker.random.word,
       race: faker.random.word,
-      level: faker.random.number
+      level: 5
     };
     charData.push(newTestChar);
   }
   return Character.insertMany(charData);
 }
 
-describe('connecting to server', function(){
+describe('API Function', function(){
 	before (function(){
     return runServer(TEST_DATABASE_URL, TEST_PORT);
   })
@@ -49,11 +49,14 @@ describe('connecting to server', function(){
     return tearDownDb();
   })
 
-	it('should return a status of 200', function(){
-		runTestServer()
-		.then(function(res){
-			expect(res).to.have.status(200);
-		})
+  describe("get requests", function(){
+  	it('should return a status of 200', function(){
+      return chai.request(app)
+      .get('/')
+  		.then(function(res){
+  			expect(res).to.have.status(200);
+  		})
+    })
 	})
 })
 
