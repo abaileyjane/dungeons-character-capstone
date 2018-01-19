@@ -28,6 +28,7 @@ app.get('/characterSheets', (req,res) =>{
 					(character)=>character.serialize())
 			});
 		})
+		.then(res.status(201))
 		.catch(err=> {
 			console.error(err);
 			res.status(500).json({message:'Internal Server Error'})
