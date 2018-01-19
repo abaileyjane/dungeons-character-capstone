@@ -2,41 +2,53 @@ const chai = require('chai');
 const mocha = require('mocha');
 const chaiHttp=require('chai-http');
 const mongoose = require('mongoose');
+const faker = require('faker');
 
 const expect = chai.expect;
 
 chai.use(chaiHttp);
 
-function runTestServer() {
-  const port = process.env.PORT || 7070;
-  return new Promise((resolve, reject) => {
-    server = app.listen(port, () => {
-      console.log(`Your app is listening on port ${port}`);
-      resolve(server);
-    }).on('error', err => {
-      reject(err)
-    });
-  });
+const{Character}=require('../models');
+const{runServer, closeServer}=require('../server');
+const{TEST_DATABASE_URL,TEST_PORT}=require('../config');
+
+function tearDownDb(){
+  console.warn('Deleting Database');
+  return mongoose.connection.dropDatabase();
 }
 
-function closeServer() {
-  return new Promise((resolve, reject) => {
-    console.log('Closing server');
-    server.close(err => {
-      if (err) {
-        reject(err);
-        // so we don't also call `resolve()`
-        return;
-      }
-      resolve();
-    });
-  });
+
+
+
+function seedCharacterData(){
+  let charData=[];
+  for (let i=0; i<5; i++){
+    let newTestChar = {
+      name: faker.name.firstName,
+      class: faker.random.word,
+      race: faker.random.word,
+      level: faker.random.number
+    };
+    charData.push(newTestChar);
+  }
+  return Character.insertMany(charData);
 }
 
 describe('connecting to server', function(){
-	after(function(){
+	before (function(){
+    return runServer(TEST_DATABASE_URL, TEST_PORT);
+  })
+  after(function(){
 		return closeServer();
 	})
+  beforeEach(function(){
+    return seedCharacterData()
+  })
+
+  afterEach(function(){
+    return tearDownDb();
+  })
+
 	it('should return a status of 200', function(){
 		runTestServer()
 		.then(function(res){
@@ -44,3 +56,4 @@ describe('connecting to server', function(){
 		})
 	})
 })
+
