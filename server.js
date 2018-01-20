@@ -31,6 +31,12 @@ app.get("/create-character",(req, res)=>{
 
 });
 
+app.get("/character-sheet",(req, res)=>{
+	console.log(res);
+	res.sendFile(__dirname+'/public/character-sheet.html');
+
+});
+
 app.get('/characterSheets', (req,res) =>{
 	Character
 		.find()
