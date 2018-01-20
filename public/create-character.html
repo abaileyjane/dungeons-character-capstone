@@ -1,0 +1,28 @@
+<html lang=en>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Dungeons and Dragons Character Keeper</title>
+		<link href="index.css" rel="stylesheet" type="text/css"/>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	</head>
+
+	<body>
+
+		<p> hello world  this is the character page</p>
+		<div class="create-new-character">
+			<form  id="newCharacter" name="new-character" method="post" action="/characterSheets">
+				Character Name:<input type="text" value="" name="name" label="name"><br>
+				Class:<input type="text" name="class" value="" label="class"><br>
+				Race:<input type="text" name="race" label="race" value=""><br>
+				Level:<input type="number" name="level" label="level" value=""><br>
+				<button id="create-character-button" type="submit">Create character</button>
+			</form>
+		</div>
+		<div class="">
+			<button id="view-characters-button">View existing characters</button>
+		</div>
+
+	</body>
+	 <script src="/client.js"></script>
+</html>

@@ -14,26 +14,26 @@ const {PORT, DATABASE_URL} = require('./config');
 const {Character}=require('./models')
 
 app.get("/",(req, res)=>{
-	console.log(res);
+	
 	res.sendFile(__dirname+'/public/homepage.html');
 
 });
 
-app.get("/view-character-list",(req, res)=>{
+app.get("/view-characters",(req, res)=>{
 	console.log(res);
-	res.sendFile(__dirname+'/public/view-character-list.html');
+	res.sendFile(__dirname+'/public/view-characters.html');
 
 });
 
 app.get("/create-character",(req, res)=>{
-	console.log(res);
+	console.log('get/create-character ran');
 	res.sendFile(__dirname+'/public/create-character.html');
 
 });
 
 app.get("/character-sheet",(req, res)=>{
 	console.log(res);
-	res.sendFile(__dirname+'/public/character-sheet.html');
+	res.sendFile(__dirname+'/character-sheet.html');
 
 });
 

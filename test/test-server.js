@@ -77,7 +77,7 @@ describe('API Function', function(){
 
     it('should return a status of 200 on view character list page load', function(){
       return chai.request(app)
-      .get('/view-character-list')
+      .get('/view-characters')
       .then(function(res){
         expect(res).to.have.status(200);
       })
