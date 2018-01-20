@@ -15,7 +15,19 @@ const {Character}=require('./models')
 
 app.get("/",(req, res)=>{
 	console.log(res);
-	res.sendFile(__dirname+'/characterSheets/index.html');
+	res.sendFile(__dirname+'/public/homepage.html');
+
+});
+
+app.get("/view-character-list",(req, res)=>{
+	console.log(res);
+	res.sendFile(__dirname+'/public/view-character-list.html');
+
+});
+
+app.get("/create-character",(req, res)=>{
+	console.log(res);
+	res.sendFile(__dirname+'/public/create-character.html');
 
 });
 
