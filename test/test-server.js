@@ -51,12 +51,36 @@ describe('API Function', function(){
   })
 
   describe("get requests", function(){
-  	it('should return a status of 200 on page load', function(){
+  	it('should return a status of 200 on homepage page load', function(){
       return chai.request(app)
       .get('/')
   		.then(function(res){
   			expect(res).to.have.status(200);
   		})
+    })
+
+    it('should return a status of 200 on character create page load', function(){
+      return chai.request(app)
+      .get('/create-character')
+      .then(function(res){
+        expect(res).to.have.status(200);
+      })
+    })
+
+    it('should return a status of 200 on character-sheet page load', function(){
+      return chai.request(app)
+      .get('/character-sheet')
+      .then(function(res){
+        expect(res).to.have.status(200);
+      })
+    })
+
+    it('should return a status of 200 on view character list page load', function(){
+      return chai.request(app)
+      .get('/view-character-list')
+      .then(function(res){
+        expect(res).to.have.status(200);
+      })
     })
 
     it('should return list of characters', function(){
