@@ -11,7 +11,8 @@ app.use(express.static('public'));
 app.use(jsonParser);
 
 const {PORT, DATABASE_URL} = require('./config');
-const {Character}=require('./models')
+const {Character}=require('./models');
+// const {clickedChracterId}= require('./public/client');
 
 app.get("/",(req, res)=>{
 	
@@ -20,20 +21,17 @@ app.get("/",(req, res)=>{
 });
 
 app.get("/view-characters",(req, res)=>{
-	console.log(res);
-	res.sendFile(__dirname+'/public/view-characters.html');
+	res.sendFile(__dirname+'/public/view-character-list.html');
 
 });
 
 app.get("/create-character",(req, res)=>{
-	console.log('get/create-character ran');
 	res.sendFile(__dirname+'/public/create-character.html');
 
 });
 
-app.get("/character-sheet",(req, res)=>{
-	console.log(res);
-	res.sendFile(__dirname+'/character-sheet.html');
+app.get("/sheet",(req, res)=>{
+	res.sendFile(__dirname+'/public/character-sheet.html');
 
 });
 
@@ -54,6 +52,22 @@ app.get('/characterSheets', (req,res) =>{
 
 });
 
+app.get('/characterSheets/:id', (req,res) =>{
+	console.log(req.params.id);
+	Character
+		.findOne({_id: req.params.id})
+		.then(characters=>{
+			console.log(characters)
+			res.json(characters)
+			})
+		.then(res.status(201))
+		.catch(err=> {
+			console.error(err);
+			res.status(500).json({message:'Internal Server Error'})
+		});
+
+});
+
 app.post("/characterSheets", formParser, (req, res)=>{
 	
 	console.log("this is the BODY", req.body);
@@ -62,13 +76,29 @@ app.post("/characterSheets", formParser, (req, res)=>{
 			name: req.body.name, 
 			class: req.body.class, 
 			race: req.body.race, 
-			level: req.body.level
+			level: req.body.level,
+			strength: req.body.strength,
+			dexterity:req.body.dexterity,
+			intelligence: req.body.intelligence,
+			wisdom: req.body.wisdom,
+			charisma: req.body.charisma,
+			constitution: req.body.constitution,
+			hitPoints: req.body.hitPoints,
+			experiencePoints: req.body.experiencePoints,
+			gold: req.body.gold,
+			background:req.body.background,
+			alignment:req.body.alignment
 		})
 		.then(character=> res.status(201).json(character))
+
+
+		
 		.catch(err=>{
 			console.error(err);
 			res.status(500).json({message: 'internal server error'});
 		});
+		window.location.href = "view-character-list.html";
+
 });
 
 
@@ -76,7 +106,7 @@ app.post("/characterSheets", formParser, (req, res)=>{
 app.put('/characterSheets/:id', formParser, (req, res)=>{
 	console.log("put request ran")
 	const toUpdate = {};
-  const updateableFields = ['name', 'class', 'race', 'level'];
+  const updateableFields = ['name', 'class', 'race', 'level', 'strength', 'dexterity', 'intelligence', 'wisdom', 'charisma', 'constitution', 'proficiencies', 'hitPoints', 'experiencePoints', 'inventory', 'gold', 'background', 'alignment'];
 
   updateableFields.forEach(field => {
     if (field in req.body) {

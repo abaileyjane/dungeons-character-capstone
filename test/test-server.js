@@ -67,9 +67,9 @@ describe('API Function', function(){
       })
     })
 
-    it('should return a status of 200 on character-sheet page load', function(){
+    it('should return a status of 200 on character-sheet page load THIS IS THE TEST THAT FAILS', function(){
       return chai.request(app)
-      .get('/character-sheet')
+      .get('/sheet')
       .then(function(res){
         expect(res).to.have.status(200);
       })
@@ -87,7 +87,6 @@ describe('API Function', function(){
       return chai.request(app)
       .get('/characterSheets')
        .then(function(res){
-        console.log(res)
         expect(res.body.characters[0]).to.be.a('object');
         expect(res.body.characters).to.have.lengthOf.at.least(1);
         expect(res.body.characters[0]).to.include.keys('name','class','race','level');
