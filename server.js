@@ -89,15 +89,12 @@ app.post("/characterSheets", formParser, (req, res)=>{
 			background:req.body.background,
 			alignment:req.body.alignment
 		})
-		.then(character=> res.status(201).json(character))
-
-
-		
+		.then(character=> res.status(201).json(character))		
 		.catch(err=>{
 			console.error(err);
 			res.status(500).json({message: 'internal server error'});
 		});
-		window.location.href = "view-character-list.html";
+	// self.location = "view-character-list.html";
 
 });
 

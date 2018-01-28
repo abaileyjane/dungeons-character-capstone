@@ -1,22 +1,9 @@
 let clickedCharacterId = "";
 let clickedCharacterInformation=[];
 
+//functions for homepage
 
-function characterNameClick(){
-	console.log(clickedCharacterInformation)
-}
-
-function watchViewCharacter(){
-	console.log("watchViewCharacter ran")
-    		$('.character-name').click(function(event){
-    			clickedCharacterId=`${event.target.id}`
-    	 		console.log("button clicked, event id is ", `${event.target.id}`,".....variable value is", clickedCharacterId);
-    	 		loadViewCharacterSheet();
-    	 		window.location.href="character-sheet.html"
-    })
-;
-}
-
+//functions to navigate to character creation page
 function watchNewCharButtonClick(){
 	console.log( 'watchNewCharButtonClick ran')
 	$('#new-character-button').on('click', function(event){
@@ -26,12 +13,79 @@ function watchNewCharButtonClick(){
 		
 })}
 
+function watchCreateCharacterSubmit(){
+	$('#create-character-button').on('click', function(){
+		event.preventDefault();
+		console.log('youclicked the button');
+        let sendName = $('#name').val();
+        let sendRace = $('#race').val();
+        let sendClass= $('#class').val();
+        let sendLevel = $('#level').val();
+        let sendStrength = $('#strength').val();
+        let sendDexterity = $('#dexterity').val();
+        let sendIntelligence = $('#intelligence').val();
+        let sendWisdom = $('#wisdom').val();
+        let sendCharisma=$('#charisma').val();
+        let sendConstitution=$('#constitution').val();
+        let sendProficiencies=$('#proficiencies').val();
+        let sendHitPoints=$('#hitPoints').val();
+        let sendExperiencePoints=$('#experiencePoints').val();
+        let sendInventory=$('#inventory').val();
+        let sendGold=$('#gold').val();
+        let sendBackground=$('#background').val();
+        let sendAlignment=$('#alignment').val();
+
+          $.ajax({
+                    url: 'http://localhost:8080/characterSheets',
+                    type: 'PUT',   //type is any HTTP method
+                    body: {
+                		name: sendName,
+						race: sendName,
+						class: sendClass,
+						level: sendLevel, 
+						strength: sendStrength,
+						dexterity: sendDexterity,
+						intelligence: sendIntelligence,
+						wisdom: sendWisdom,
+						charisma: sendCharisma,
+						constitution: sendConstitution,
+						proficiencies: sendProficiencies,
+						hitPoints: sendHitPoints,
+						experiencePoints: sendExperiencePoints,
+						inventory: sendInventory,
+						gold: sendGold,
+						background: sendBackground,
+						alignment: sendAlignment
+                    },      //Data as js object
+                    success: function () {
+                    	window.location.href = "view-character-list.html";
+
+                    }
+                })
+
+	})
+}
+
+
+
+//functions to navigate to view characters page
+function goToViewCharacters(){
+	window.location.href = "view-character-list.html";
+
+}
+
+function loadViewCharacters(){
+	$(window).on("load", function(){
+		getCharacterData(displayCharacterNames);
+		}
+	)
+}
+
 function getCharacterData(callback){
 	console.log('getCharacterData ran')
 	$.getJSON('http://localhost:8080/characterSheets', callback);
 	watchViewCharacter();
 }
-
 function displayCharacterNames(data){
 	console.log('displayCharacterNames ran', 'data.response is', data.characters)
 	const results = data.characters.map((item,index)=> renderCharacterNameResult(item));
@@ -61,6 +115,27 @@ function watchViewCharactersButtonClick(){
 	})
 }
 
+
+//functions to navigate to view character sheet page
+function setClickedCharId(){
+	    clickedCharacterId=`${event.target.id}`
+	    return clickedCharacterId;
+
+}
+function watchViewCharacter(){
+	console.log("watchViewCharacter ran")
+    		$('.character-name').click(function(event){
+    			setCharacterInfoVariable();
+				loadViewCharacterSheet();    			// window.location.href="character-sheet.html";
+    			
+    		return goToViewCharacterSheet();
+    		})
+}
+function goToViewCharacterSheet(){
+	window.location.href = "character-sheet.html";
+
+}
+
 function setUpdateFields(callback){
 	console.log('populateUpdateFields ran')
 	$.getJSON(`http://localhost:8080/characterSheets/${clickedCharacterId}`, callback);
@@ -73,12 +148,7 @@ function setCharacterInfoVariable(result){
 	catch(e) { console.log("error",e) }
 }
 
-function loadViewCharacters(){
-	$(window).on("load", function(){
-		getCharacterData(displayCharacterNames);
-		}
-	)
-}
+
 
 function loadViewCharacterSheet(){
 	console.log("loadViewCharacterSheet ran");
@@ -86,10 +156,22 @@ function loadViewCharacterSheet(){
 		setUpdateFields(setCharacterInfoVariable)
 	}
 
+function loadUpdateCharacter(){
+	$(window).on("load", function(){
+		populateUpdateCharacterFields();
+
+		}
+	)
+}
+
+
 function populateUpdateCharacterFields(){
 	console.log("populateUpdateCharacterFields is running")
 	let oldCharInfo = localStorage.getItem('clickedCharacterInformation');
-	const decodeJSON = JSON.parse(oldCharInfo);
+	console.log(oldCharInfo ==="undefined");
+	const decodeJSON = oldCharInfo==="undefined" ? {}:JSON.parse(oldCharInfo);
+	
+	
 	$('.update-character').html(
 		`<form  id="updateCharacter" name="update-character" method="put" action="/characterSheets/"ID>
 				Character Name:<input class="" type="text" value="" name="name" label="name" placeholder="${decodeJSON.name}"><br>
@@ -110,22 +192,81 @@ function populateUpdateCharacterFields(){
 				Gold: <input class="" type="number" name="gold" label="gold" placeholder="${decodeJSON.gold}"><br>
 
 				<button id="create-character-button" type="submit">Create character</button>
+				<button id="${decodeJSON.id}" class="delete-character-button">Delete Character</button
 			</form>
 			`)
 }
+//functions to delete character
 
-function loadUpdateCharacter(){
-	$(window).on("load", function(){
-		populateUpdateCharacterFields();
-
-		}
-	)
+function deleteCharacter(callback){
+	clickedCharacterId=`${event.target.id}`;
+    	$.deleteJSON(`http://localhost:8080/characterSheets/${clickedCharacterId}`, callback)
 }
 
 
+function deleteCharacterButtonClick(){
+	$('.delete-character-button').click(function(){
+    	deleteCharacter(goToViewCharacters)
+    })
+}
+
+
+function watchCreateCharacterSubmit(){
+	$('#create-character-button').on('click', function(){
+		event.preventDefault();
+		console.log('youclicked the button');
+        let sendName = $('#name').val();
+        let sendRace = $('#race').val();
+        let sendClass= $('#class').val();
+        let sendLevel = $('#level').val();
+        let sendStrength = $('#strength').val();
+        let sendDexterity = $('#dexterity').val();
+        let sendIntelligence = $('#intelligence').val();
+        let sendWisdom = $('#wisdom').val();
+        let sendCharisma=$('#charisma').val();
+        let sendConstitution=$('#constitution').val();
+        let sendProficiencies=$('#proficiencies').val();
+        let sendHitPoints=$('#hitPoints').val();
+        let sendExperiencePoints=$('#experiencePoints').val();
+        let sendInventory=$('#inventory').val();
+        let sendGold=$('#gold').val();
+        let sendBackground=$('#background').val();
+        let sendAlignment=$('#alignment').val();
+
+        console.log(sendName, sendClass, sendAlignment);
+
+          $.ajax({
+                    url: 'http://localhost:8080/characterSheets',
+                    type: 'POST',   //type is any HTTP method
+                    data: {
+                		"name": `${sendName}`,
+						"race": `${sendRace}`,
+						'class': `${sendClass}`,
+						'level': `${sendLevel}`, 
+						'strength': `${sendStrength}`,
+						'dexterity': `${sendDexterity}`,
+						'intelligence': `${sendIntelligence}`,
+						'wisdom': `${sendWisdom}`,
+						'charisma': `${sendCharisma}`,
+						'constitution': `${sendConstitution}`,
+						'proficiencies': `${sendProficiencies}`,
+						'hitPoints': `${sendHitPoints}`,
+						'experiencePoints': `${sendExperiencePoints}`,
+						'inventory': `${sendInventory}`,
+						'gold': `${sendGold}`,
+						'background': `${sendBackground}`,
+						'alignment': `${sendAlignment}`
+                    }
+                })
+          .then(function(){window.location.href = "view-character-list.html"})
+
+	})
+}
+
+watchCreateCharacterSubmit();
 watchNewCharButtonClick();
 watchViewCharactersButtonClick();
-// watchCreateCharSubmitClick();
 loadViewCharacters();
-characterNameClick();
+// characterNameClick();
 loadUpdateCharacter();
+deleteCharacterButtonClick();
