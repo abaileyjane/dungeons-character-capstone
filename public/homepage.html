@@ -2,18 +2,26 @@
 <html>
 <head>
 	<title>Dungeons and Dragons Character Keeper</title>
+	<link rel="stylesheet" type="text/css" href="/index.css">
+		<link rel="stylesheet" type="text/css" href="/floatgrid.css">
+	<link href="https://fonts.googleapis.com/css?family=Crimson+Text|Julius+Sans+One" rel="stylesheet">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </head>
-<body>
-	<div>
-		<h1> Dungeons and Dragons Character Keeper</h1>
-	</div>
-	<div>
-		<p>This app allows you to store all of your dungeons and dragons characters in one place for safe keeping. No more misplacing your character sheets and having your beloved character lost forever! Click below to create a new character or to view existing characters. </p>
-	</div>
-	<div>
-		<button id="new-character-button">Create a Character</button>
-		<button id="view-characters-button">View existing characters</button>
+<body class="col-12">
+	<div class="content col-12">
+		<div class="row">
+			<h1 class="logo homepage">Dragon's Horde</h1>
+		</div>
+		<div class="row">
+			<h2 class="logo homepage"> Dungeons and Dragons Character Keeper</h2>
+		</div>
+		<div class="row">
+			<button class="homepage button col-3" id="new-character-button">Create a Character</button>
+			<button class="homepage button col-3" id="view-characters-button">View existing characters</button>
+		</div>
+		<div class="row">
+			<p>This app allows you to store all of your dungeons and dragons characters in one place for safe keeping. No more misplacing your character sheets and having your beloved character lost forever! Click below to create a new character or to view existing characters. </p>
+		</div>
 	</div>
 </body>
 <script src="/client.js"></script>

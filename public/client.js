@@ -1,5 +1,4 @@
-let clickedCharacterId = "";
-let clickedCharacterInformation=[];
+
 
 //functions for homepage
 
@@ -84,14 +83,14 @@ function loadViewCharacters(){
 function getCharacterData(callback){
 	console.log('getCharacterData ran')
 	$.getJSON('http://localhost:8080/characterSheets', callback);
-	watchViewCharacter();
+	watchViewSingleCharacter();
 }
 function displayCharacterNames(data){
 	console.log('displayCharacterNames ran', 'data.response is', data.characters)
 	const results = data.characters.map((item,index)=> renderCharacterNameResult(item));
 	$('.character-names').html('')
 	$('.character-names').append(results);
-	watchViewCharacter();
+	watchViewSingleCharacter();
 		
 }
 
@@ -117,59 +116,72 @@ function watchViewCharactersButtonClick(){
 
 
 //functions to navigate to view character sheet page
-function setClickedCharId(){
+let clickedCharacterId = "";
+let clickedCharacterInformation=[];
+
+function setClickedCharId(callback){
+
 	    clickedCharacterId=`${event.target.id}`
+	    console.log(clickedCharacterId)
 	    return clickedCharacterId;
 
-}
-function watchViewCharacter(){
-	console.log("watchViewCharacter ran")
-    		$('.character-name').click(function(event){
-    			setCharacterInfoVariable();
-				loadViewCharacterSheet();    			// window.location.href="character-sheet.html";
-    			
-    		return goToViewCharacterSheet();
-    		})
 }
 function goToViewCharacterSheet(){
 	window.location.href = "character-sheet.html";
 
 }
+function watchViewSingleCharacter(){
+	console.log("watchViewCharacter ran")
+    		$('.character-name').click(function(event){
+    			setClickedCharId(
+    				setCharacterInfoVariable(goToViewCharacterSheet))
+    			
+    		})
+    		
+}
+
 
 function setUpdateFields(callback){
-	console.log('populateUpdateFields ran')
+	console.log('populateUpdateFields ran', clickedCharacterId)
 	$.getJSON(`http://localhost:8080/characterSheets/${clickedCharacterId}`, callback);
 
 }
 
-function setCharacterInfoVariable(result){
+function setCharacterInfoVariable(callback){
 	
-	try { localStorage.setItem("clickedCharacterInformation",JSON.stringify(result)) } 
+	try { localStorage.setItem("clickedCharacterId", clickedCharacterId) } 
 	catch(e) { console.log("error",e) }
 }
 
 
 
-function loadViewCharacterSheet(){
-	console.log("loadViewCharacterSheet ran");
-		console.log('clickedCharacterInformation updated');
-		setUpdateFields(setCharacterInfoVariable)
-	}
+
+// function loadViewCharacterSheet(){
+// 	console.log("loadViewCharacterSheet ran");
+// 		console.log('clickedCharacterInformation updated');
+// 		setUpdateFields(setCharacterInfoVariable)
+// 	}
 
 function loadUpdateCharacter(){
 	$(window).on("load", function(){
-		populateUpdateCharacterFields();
+		getClickedCharacterInfo(populateUpdateCharacterFields);
 
 		}
 	)
 }
 
+function getClickedCharacterInfo(callback){
+	let selectedCharId = localStorage.getItem('clickedCharacterId');
+	$.getJSON(`http://localhost:8080/characterSheets/${selectedCharId}`, callback);
+}
 
-function populateUpdateCharacterFields(){
-	console.log("populateUpdateCharacterFields is running")
-	let oldCharInfo = localStorage.getItem('clickedCharacterInformation');
-	console.log(oldCharInfo ==="undefined");
-	const decodeJSON = oldCharInfo==="undefined" ? {}:JSON.parse(oldCharInfo);
+
+function populateUpdateCharacterFields(result){
+	console.log("populateUpdateCharacterFields is running.... result is", result)
+	console.log(result ==="undefined");
+
+	const decodeJSON = result==="undefined" ? {}:JSON.parse(result);
+	console.log(decodeJSON);
 	
 	
 	$('.update-character').html(
@@ -270,3 +282,4 @@ loadViewCharacters();
 // characterNameClick();
 loadUpdateCharacter();
 deleteCharacterButtonClick();
+watchViewSingleCharacter();
