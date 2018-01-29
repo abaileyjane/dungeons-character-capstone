@@ -36,10 +36,10 @@ function watchCreateCharacterSubmit(){
 
           $.ajax({
                     url: 'http://localhost:8080/characterSheets',
-                    type: 'PUT',   //type is any HTTP method
-                    body: {
+                    type: 'POST',   //type is any HTTP method
+                    data: {
                 		name: sendName,
-						race: sendName,
+						race: sendRace,
 						class: sendClass,
 						level: sendLevel, 
 						strength: sendStrength,
@@ -56,14 +56,10 @@ function watchCreateCharacterSubmit(){
 						background: sendBackground,
 						alignment: sendAlignment
                     },      //Data as js object
-                    success: function () {
-                    	window.location.href = "view-character-list.html";
-
-                    }
                 })
-
-	})
-}
+          .then(function () {
+                window.location.href = "view-character-list.html"})
+})}
 
 
 
@@ -98,8 +94,8 @@ function renderCharacterNameResult(result){
 	console.log("renderCharacterNameResult ran");
 	return `
 		<div class='character-name' id="${result.id}">
-			<a href='character-sheet.html'>${result.name}</a>
-			<h3>${result.race} ... ${result.class} ... Level ${result.level}</h3>
+			<h6 id="${result.id}">${result.name}</h6>
+			<h5 id="${result.id}">${result.race} ... ${result.class} ... Level ${result.level}</h5>
 		</div>
 		`
 }
@@ -185,7 +181,7 @@ function populateUpdateCharacterFields(result){
 	
 	
 	$('.update-character').html(
-		`<form  id="updateCharacter" name="update-character" method="put" action="/characterSheets/"ID>
+		`<form  id="updateCharacter" class="col-6 newCharacter" name="update-character" method="put" action="/characterSheets/"ID>
 				Character Name:<input class="" type="text" value="" name="name" label="name" placeholder="${decodeJSON.name}"><br>
 				Class:<input class="" type="text" name="class" value="" label="class" placeholder="${decodeJSON.class}"><br>
 				Race:<input class="" type="text" name="race" label="race" value="" placeholder="${decodeJSON.race}"><br>
@@ -203,77 +199,37 @@ function populateUpdateCharacterFields(result){
 				Inventory: <input class="" type="string" name="inventory" label="inventory" placeholder="${decodeJSON.inventory}"><br>
 				Gold: <input class="" type="number" name="gold" label="gold" placeholder="${decodeJSON.gold}"><br>
 
-				<button id="create-character-button" type="submit">Create character</button>
-				<button id="${decodeJSON.id}" class="delete-character-button">Delete Character</button
+				<button class="col-3  update-character-page-button" id="update-character-button" type="">Save</button>
+				<button class="col-3 update-character-page-button" id="view-characters-button">View others</button>
+				<button class="col-3 update-character-page-button" id="delete-character-button">Kill</button>
 			</form>
 			`)
 }
+
+function viewOtherCharactersButtonClick(){
+	$('#view-characters-button').click(function(){
+    	goToViewCharacters()
+    })
+}
+
+viewOtherCharactersButtonClick();
+
 //functions to delete character
 
 function deleteCharacter(callback){
-	clickedCharacterId=`${event.target.id}`;
     	$.deleteJSON(`http://localhost:8080/characterSheets/${clickedCharacterId}`, callback)
 }
 
 
+
 function deleteCharacterButtonClick(){
-	$('.delete-character-button').click(function(){
+	$('#delete-character-button').click(function(){
     	deleteCharacter(goToViewCharacters)
     })
 }
 
 
-function watchCreateCharacterSubmit(){
-	$('#create-character-button').on('click', function(){
-		event.preventDefault();
-		console.log('youclicked the button');
-        let sendName = $('#name').val();
-        let sendRace = $('#race').val();
-        let sendClass= $('#class').val();
-        let sendLevel = $('#level').val();
-        let sendStrength = $('#strength').val();
-        let sendDexterity = $('#dexterity').val();
-        let sendIntelligence = $('#intelligence').val();
-        let sendWisdom = $('#wisdom').val();
-        let sendCharisma=$('#charisma').val();
-        let sendConstitution=$('#constitution').val();
-        let sendProficiencies=$('#proficiencies').val();
-        let sendHitPoints=$('#hitPoints').val();
-        let sendExperiencePoints=$('#experiencePoints').val();
-        let sendInventory=$('#inventory').val();
-        let sendGold=$('#gold').val();
-        let sendBackground=$('#background').val();
-        let sendAlignment=$('#alignment').val();
 
-        console.log(sendName, sendClass, sendAlignment);
-
-          $.ajax({
-                    url: 'http://localhost:8080/characterSheets',
-                    type: 'POST',   //type is any HTTP method
-                    data: {
-                		"name": `${sendName}`,
-						"race": `${sendRace}`,
-						'class': `${sendClass}`,
-						'level': `${sendLevel}`, 
-						'strength': `${sendStrength}`,
-						'dexterity': `${sendDexterity}`,
-						'intelligence': `${sendIntelligence}`,
-						'wisdom': `${sendWisdom}`,
-						'charisma': `${sendCharisma}`,
-						'constitution': `${sendConstitution}`,
-						'proficiencies': `${sendProficiencies}`,
-						'hitPoints': `${sendHitPoints}`,
-						'experiencePoints': `${sendExperiencePoints}`,
-						'inventory': `${sendInventory}`,
-						'gold': `${sendGold}`,
-						'background': `${sendBackground}`,
-						'alignment': `${sendAlignment}`
-                    }
-                })
-          .then(function(){window.location.href = "view-character-list.html"})
-
-	})
-}
 
 watchCreateCharacterSubmit();
 watchNewCharButtonClick();

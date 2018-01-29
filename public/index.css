@@ -1,12 +1,12 @@
 /*all pages styling*/
 
 body {
-	border: solid 10px #92140C;
 	background-color: #1e1e24;
 	padding:10px;
 }
 
 .content{
+	border: solid 10px #92140C;
 	background-color: #fff8f0;
 	height: 100%;
 	width:auto;
@@ -61,3 +61,87 @@ h2.logo.homepage{
 
 .dTwenty{
 	width:100%;
+}
+
+.newCharacter{
+	
+	font-family: 'Crimson Text', serif;
+
+}
+
+.row.create-new-character-form{
+	column-count: 2;
+	column-gap: 0px;
+	
+
+}
+
+.create-character-page-button{
+	text-align:center;
+	font-family: 'Julius Sans One', sans-serif;
+	height:30px;
+	margin:5px;
+}
+
+.update-character-page-button{
+	text-align:center;
+	font-family: 'Julius Sans One', sans-serif;
+	height:30px;
+	margin:5px;
+}
+
+.content.create-character-page{
+	height:auto;
+}
+
+footer{
+	background-color: #fff8f0
+}
+
+h3{
+	font-family: 'Julius Sans One', sans-serif;
+	font-size: 24px;
+	text-align: center;
+	margin-bottom: 0px;
+
+}
+
+h4{
+	margin-top: 0px;
+	font-family: 'Crimson Text', serif;
+	text-align: center;
+	font-size: 18px
+}
+
+.character-names{
+	column-count: 2;
+}
+
+h6{
+	font-family: 'Julius Sans One', sans-serif;
+	font-size: 24px;
+	text-align: center;
+}
+
+h5{
+	font-family: 'Crimson Text', serif;
+	text-align: center;
+	font-size: 18px
+}
+
+.character-name{
+	border:solid 10px #430a06;
+	margin-top: 0px;
+	margin-bottom:20px;
+	background-color: #eaeaeb
+}
+
+.button.charListPage{
+	position:relative;
+	margin-left:37.5%;
+	margin-bottom:20px;
+	text-align:center;
+	font-family: 'Julius Sans One', sans-serif;
+	height:30px;
+	width:25%;
+}

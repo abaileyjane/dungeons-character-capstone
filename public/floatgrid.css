@@ -59,8 +59,16 @@
   .dTwenty{
     display:none;
   }
+.button.charListPage{
+  margin-top:0;
+  margin-left: 0;
+  margin-right: 0;
+  margin-bottom:20px;
+}
 
-
+.character-names{
+  column-count: 1;
+}
 }
 
 @media only screen and (min-width: 819px) {
@@ -88,5 +96,5 @@
   .col-1 {
     width:8.3333%;
   }
-
+}
 

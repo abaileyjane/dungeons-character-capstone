@@ -4,38 +4,52 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<title>Dungeons and Dragons Character Keeper</title>
 		<link href="index.css" rel="stylesheet" type="text/css"/>
+		<link rel="stylesheet" type="text/css" href="/floatgrid.css">
+		<link href="https://fonts.googleapis.com/css?family=Crimson+Text|Julius+Sans+One" rel="stylesheet">
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	</head>
 
 	<body>
-
-		<p> hello world  this is the character page</p>
-		<div class="create-new-character">
-			<form  id="newCharacter" name="new-character" <!-- method="post" action="/characterSheets" -->>
-				Character Name:<input id="name" class="" type="text" value="" name="name" label="name"><br>
-				Class:<input id="class" class="" type="text" name="class" value="" label="class"><br>
-				Race:<input id="race" class="" type="text" name="race" label="race" value=""><br>
-				Level:<input id="level" class="" type="number" name="level" label="level" value=""><br>
-				Background: <input id="background" class="" type="string" name="background" label="background"><br>
-				Alignment: <input id="alignment" class="" type="string" name="alignment" label="alignment"><br>
-				Experience Points: <input id="experiencePoints" class="" type="number" name="experiencePoints" label="experiencePoints"><br>
-				Hit Points: <input id="hitPoints" class="" type="number" name="hitPoints" label="hitPoints"><br>
-				Strength: <input id="strength" class="" type="number" name="strength" label="strength"><br> 
-				Dexterity: <input id="dexterity" class="" type="number" name="dexterity" label="dexterity"><br>
-				Constitution:<input id="constitution" class="" type="number" name="constitution" label="constitution"><br>
-				Intelligence: <input id="intelligence"  class="" type="number" name="intelligence" label="itelligence"><br>
-				Wisdom: <input id="wisdom" class="" type="number" name="wisdom" label="wisdom"><br>
-				Charisma: <input id="charisma" class="" type="number" name="charisma" label="charisma"><br>
-				Inventory: <input id="inventory" class="" type="string" name="inventory" label="inventory"><br>
-				Gold: <input id="gold" class="" type="number" name="gold" label="gold"><br>
-
-				<button id="create-character-button" type="">Create character</button>
-			</form>
+		<div class="content create-character-page col-12">
+			<div class="row col-12">
+				<h1>New Adventurer</h1>
+			</div>
+			<div class="row  create-new-character-form">
+				<p class="col-3"></p>
+				<form  id="newCharacter" class="newCharacter col-6" name="new-character">
+					Name:<input id="name" class="" type="text" value="" name="name" label="name"><br>
+					Class:<input id="class" class="" type="text" name="class" value="" label="class"><br>
+					Race:<input id="race" class="" type="text" name="race" label="race" value=""><br>
+					Background: <input id="background" class="" type="string" name="background" label="background"><br>
+					Alignment: <input id="alignment" class="" type="string" name="alignment" label="alignment"><br>
+					Inventory: <input id="inventory" class="" type="string" name="inventory" label="inventory"><br>
+					Gold: <input id="gold" class="" type="number" name="gold" label="gold"><br>
+					Experience Points: <input id="experiencePoints" class="" type="number" name="experiencePoints" label="experiencePoints"><br>
+					Level:<input id="level" class="" type="number" name="level" label="level" value=""><br>
+					Strength: <input id="strength" class="" type="number" name="strength" label="strength"><br> 
+					Dexterity: <input id="dexterity" class="" type="number" name="dexterity" label="dexterity"><br>
+					Constitution:<input id="constitution" class="" type="number" name="constitution" label="constitution"><br>
+					Intelligence: <input id="intelligence"  class="" type="number" name="intelligence" label="itelligence"><br>
+					Wisdom: <input id="wisdom" class="" type="number" name="wisdom" label="wisdom"><br>
+					Charisma: <input id="charisma" class="" type="number" name="charisma" label="charisma"><br>
+					Hit Points: <input id="hitPoints" class="" type="number" name="hitPoints" label="hitPoints"><br>	
+				</form>
+			</div>
+			<div class="row buttons col-12">
+				<p class="col-3"></p>
+				<button class="col-3  create-character-page-button" id="create-character-button" type="">Create</button>
+				<button class="col-3 create-character-page-button" id="view-characters-button">Scrap</button>
+			</div>
+		
+			<footer>
+				<div class="row col-12">
+					<h3 class="footer">Dragon's Horde</h3>
+				</div>
+				<div class="row col-12">
+					<h4 class="footer"> Dungeons and Dragons Character Keeper</h4>
+				</div>
+			</footer>
 		</div>
-		<div class="">
-			<button id="view-characters-button">View existing characters</button>
-		</div>
-
 	</body>
 	 <script src="/client.js"></script>
 </html>
