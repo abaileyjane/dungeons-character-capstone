@@ -8,7 +8,7 @@ body {
 .content{
 	border: solid 10px #92140C;
 	background-color: #fff8f0;
-	height: 100%;
+	height: auto;
 	width:auto;
 	padding-top: 60px;
 	font-size: 24px;
@@ -117,6 +117,10 @@ h4{
 	column-count: 2;
 }
 
+.update-character{
+	column-count: 2;
+}
+
 h6{
 	font-family: 'Julius Sans One', sans-serif;
 	font-size: 24px;
@@ -144,4 +148,17 @@ h5{
 	font-family: 'Julius Sans One', sans-serif;
 	height:30px;
 	width:25%;
+}
+
+.row.col-12.button-row{
+	margin-left: 11%
+}
+
+.button.update-character-page-button{
+	position:relative;
+	width:25%;
+	margin-bottom:20px;
+	text-align:center;
+	font-family: 'Julius Sans One', sans-serif;
+	height:30px;
 }

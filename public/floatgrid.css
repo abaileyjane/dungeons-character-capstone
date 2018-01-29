@@ -64,9 +64,18 @@
   margin-left: 0;
   margin-right: 0;
   margin-bottom:20px;
+  width:100%;
 }
 
 .character-names{
+  column-count: 1;
+}
+
+.row.create-new-character-form{
+  column-count: 1;
+}
+
+.row.col-12.update-character{
   column-count: 1;
 }
 }
