@@ -55,6 +55,14 @@
 
 }
 
+@media only screen and (max-width: 819px){
+  .dTwenty{
+    display:none;
+  }
+
+
+}
+
 @media only screen and (min-width: 819px) {
   /* 3 columns, 3/12 in % */
  

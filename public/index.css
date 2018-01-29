@@ -8,9 +8,10 @@ body {
 
 .content{
 	background-color: #fff8f0;
-	height: 100vh;
+	height: 100%;
 	width:auto;
 	padding-top: 60px;
+	font-size: 24px;
 }
 
 h1{
@@ -38,3 +39,25 @@ h1.logo.homepage{
 h2.logo.homepage{
 	margin-top: 10px
 }
+
+.button.homepage{
+	text-align:center;
+	font-family: 'Julius Sans One', sans-serif;
+	height:30px;
+	margin:5px;
+}
+
+.row.buttons{
+	margin:0 auto;
+	float:right;
+}
+
+.description{
+	float:right;
+	 text-align: justify;
+    -moz-text-align-last: center;
+    text-align-last: center;
+}
+
+.dTwenty{
+	width:100%;
