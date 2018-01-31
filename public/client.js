@@ -96,10 +96,11 @@ function displayCharacterNames(data){
 function renderCharacterNameResult(result){
 	console.log("renderCharacterNameResult ran");
 	return `
-		<div class='character-name' id="${result.id}">
+		<div class='character-name col-5' id="${result.id}">
 			<h6 id="${result.id}">${result.name}</h6>
 			<h5 id="${result.id}">${result.race} ... ${result.class} ... Level ${result.level}</h5>
 		</div>
+
 		`
 }
 
@@ -179,22 +180,22 @@ function populateUpdateCharacterFields(result){
 		
 
 		<form  id="updateCharacter" class="col-6 newCharacter" name="update-character" method="put" action="/characterSheets/"ID>
-				Character Name:<input class="" type="text" value="" name="name" label="name" placeholder="${decodeJSON.name}" id="name" ><br>
-				Class:<input class="" type="text" name="class" value="" label="class" placeholder="${decodeJSON.class}" id="class" ><br>
-				Race:<input class="" type="text" name="race" label="race" value="" placeholder="${decodeJSON.race}" id="race" ><br>
-				Level:<input class="" type="number" name="level" label="level" value="" placeholder="${decodeJSON.level}" id="level" ><br>
-				Background: <input class="" type="string" name="background" label="background" placeholder="${decodeJSON.background}" id="background" ><br>
-				Alignment: <input class="" type="string" name="alignment" label="alignment" placeholder="${decodeJSON.alignment}" id="alignment" ><br>
-				Experience Points: <input class="" type="number" name="experiencePoints" label="experiencePoints" placeholder="${decodeJSON.experiencePoints}" id="experiencePoints" ><br>
-				Hit Points: <input class="" type="number" name="hitPoints" label="hitPoints" placeholder="${decodeJSON.hitPoints}" id="hitPoints" ><br>
-				Strength: <input class="" type="number" name="strength" label="strength" placeholder="${decodeJSON.strength}" id="strength" ><br> 
-				Dexterity: <input class="" type="number" name="dexterity" label="dexterity" placeholder="${decodeJSON.dexterity}" id="dexterity" ><br>
-				Constitution:<input class="" type="number" name="constitution" label="constitution" placeholder="${decodeJSON.constitution}" id="constitution" ><br>
-				Intelligence: <input class="" type="number" name="intelligence" label="intelligence" placeholder="${decodeJSON.intelligence}" id="intelligence" ><br>
-				Wisdom: <input class="" type="number" name="wisdom" label="wisdom" placeholder="${decodeJSON.wisdom}" id="wisdom" ><br>
-				Charisma: <input class="" type="number" name="charisma" label="charisma" placeholder="${decodeJSON.charisma}" id="charisma" ><br>
-				Inventory: <input class="" type="string" name="inventory" label="inventory" placeholder="${decodeJSON.inventory}"  id="inventory" ><br>
-				Gold: <input class="" type="number" name="gold" label="gold" placeholder="${decodeJSON.gold}"  id="gold" ><br>
+				Character Name<br><input class="" type="text" name="name" label="name" value="${decodeJSON.name}" id="name" ><br>
+				Class<br><input class="" type="text" name="class" label="class" value="${decodeJSON.class}" id="class" ><br>
+				Race<br><input class="" type="text" name="race" label="race"  value="${decodeJSON.race}" id="race" ><br>
+				Level<br><input class="" type="number" name="level" label="level"  value="${decodeJSON.level}" id="level" ><br>
+				Background<br><input class="" type="string" name="background" label="background" value="${decodeJSON.background}" id="background" ><br>
+				Alignment<br><input class="" type="string" name="alignment" label="alignment" value="${decodeJSON.alignment}" id="alignment" ><br>
+				Experience Points<br><input class="" type="number" name="experiencePoints" label="experiencePoints" value="${decodeJSON.experiencePoints}" id="experiencePoints" ><br>
+				Hit Points<br><input class="" type="number" name="hitPoints" label="hitPoints" value="${decodeJSON.hitPoints}" id="hitPoints" ><br>
+				Strength<br><input class="" type="number" name="strength" label="strength" value="${decodeJSON.strength}" id="strength" ><br> 
+				Dexterity<br><input class="" type="number" name="dexterity" label="dexterity" value="${decodeJSON.dexterity}" id="dexterity" ><br>
+				Constitution<br><input class="" type="number" name="constitution" label="constitution" value="${decodeJSON.constitution}" id="constitution" ><br>
+				Intelligence<br><input class="" type="number" name="intelligence" label="intelligence" value="${decodeJSON.intelligence}" id="intelligence" ><br>
+				Wisdom<br><input class="" type="number" name="wisdom" label="wisdom" value="${decodeJSON.wisdom}" id="wisdom" ><br>
+				Charisma<br><input class="" type="number" name="charisma" label="charisma" value="${decodeJSON.charisma}" id="charisma" ><br>
+				Inventory<br><input class="" type="string" name="inventory" label="inventory" value="${decodeJSON.inventory}"  id="inventory" ><br>
+				Gold<br><input class="" type="number" name="gold" label="gold" value="${decodeJSON.gold}"  id="gold" ><br>
 
 					
 			</form>
@@ -207,80 +208,19 @@ function watchUpdateCharacterSubmit(){
 		console.log('youclicked the button');
 		let selectedCharId = localStorage.getItem('clickedCharacterId');
 
-		let updatableFields=[]
-	    let sendName = $('#name').val();
-        let sendRace = $('#race').val();
-        let sendClass= $('#class').val();
-        let sendLevel = $('#level').val();
-        let sendStrength = $('#strength').val();
-        let sendDexterity = $('#dexterity').val();
-        let sendIntelligence = $('#intelligence').val();
-        let sendWisdom = $('#wisdom').val();
-        let sendCharisma=$('#charisma').val();
-        let sendConstitution=$('#constitution').val();
-        let sendHitPoints=$('#hitPoints').val();
-        let sendExperiencePoints=$('#experiencePoints').val();
-        let sendInventory=$('#inventory').val();
-        let sendGold=$('#gold').val();
-        let sendBackground=$('#background').val();
-        let sendAlignment=$('#alignment').val();
-		if($('#name').val()!==""){
-			updatableFields.push(`name: ${sendName}`)
-		}
-		if($('#race').val()!==""){
-			updatableFields.push(`race: ${sendRace}`)
-		}
-		if($('#class').val()!==""){
-			updatableFields.push(`class: ${sendClass}`)
-		}
 
-		if($('#level').val()!==""){
-			updatableFields.push(`level:${sendLevel}`)
-		}
-		if($('#strength').val()!==""){
-			updatableFields.push(`strength: ${sendStrength}`)
-		}
-		if($('#dexterity').val()!==""){
-			updatableFields.push(`dexterity:${sendDexterity}`)
-		}
-		if($('#intelligence').val()!==""){
-			updatableFields.push(`intelligence:${sendIntelligence}`)
-		}
-		if($('#wisdom').val()!==""){
-			updatableFields.push(`wisdom:${sendWisdom}`)
-		}
-		if($('#charisma').val()!==""){
-			updatableFields.push(`charisma:${sendCharisma}`)
-		}
-		if($('#constitution').val()!==""){
-			updatableFields.push(`constitution:${sendConstitution}`)
-		}
-		if($('#sendHitPoints').val()!==""){
-			updatableFields.push(`hitPoints:${sendHitPoints}`)
-		}
-		if($('#experiencePoints').val()!==""){
-			updatableFields.push(`experiencePoints:${sendExperiencePoints}`)
-		}
-		if($('#gold').val()!==""){
-			updatableFields.push(`gold:${sendGold}`)
-		}
-		if($('#alignment').val()!==""){
-			updatableFields.push(`alignment:${sendAlignment}`)
-		}
-		if($('#background').val()!==""){
-			updatableFields.push(`background:${sendBackground}`)
-		}
-		if($('#inventory').val()!==""){
-			updatableFields.push(`inventory:${sendInventory}`)
-		}
+let updatableFields={};
+['class', 'level', 'strength', 'name','race', 'dexterity', 'intelligence', 'wisdom', 'charisma', 'constitution', 'hitPoints', 'experiencePoints', 'inventory', 'gold', 'background', 'alignment'].forEach(function(item) {
+  updatableFields[item]= $('#'+ item).val(); 
+ })
+		
         console.log("updatableFields is", updatableFields)
         $.ajax({
                     url: `http://localhost:8080/characterSheets/${selectedCharId}`,
-                    type: 'PUT',   //type is any HTTP method
-                    data: `{
-                    	${updatableFields}
+                    type: 'PUT',   
+                    data: updatableFields
   
-                    }`,   
+                       
                 })
           .then(function () {
                 alert("Character Saved")

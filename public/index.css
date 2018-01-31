@@ -114,7 +114,8 @@ h4{
 }
 
 .character-names{
-	column-count: 2;
+
+
 }
 
 .update-character{
@@ -138,6 +139,7 @@ h5{
 	margin-top: 0px;
 	margin-bottom:20px;
 	background-color: #eaeaeb
+	margin-right:20px;
 }
 
 .button.charListPage{
