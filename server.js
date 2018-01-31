@@ -53,11 +53,9 @@ app.get('/characterSheets', (req,res) =>{
 });
 
 app.get('/characterSheets/:id', (req,res) =>{
-	console.log(req.params.id);
 	Character
 		.findOne({_id: req.params.id})
 		.then(characters=>{
-			console.log(characters)
 			res.json(characters)
 			})
 		.then(res.status(201))
@@ -70,7 +68,6 @@ app.get('/characterSheets/:id', (req,res) =>{
 
 app.post("/characterSheets", formParser, (req, res)=>{
 	
-	console.log("this is the BODY", req.body);
 	Character
 		.create({
 			name: req.body.name, 
@@ -101,7 +98,6 @@ app.post("/characterSheets", formParser, (req, res)=>{
 
 
 app.put('/characterSheets/:id', formParser, (req, res)=>{
-	console.log("put request ran")
 	const toUpdate = {};
   const updateableFields = ['name', 'class', 'race', 'level', 'strength', 'dexterity', 'intelligence', 'wisdom', 'charisma', 'constitution', 'proficiencies', 'hitPoints', 'experiencePoints', 'inventory', 'gold', 'background', 'alignment'];
 
@@ -110,7 +106,6 @@ app.put('/characterSheets/:id', formParser, (req, res)=>{
       toUpdate[field] = req.body[field];
     }
   });
-  console.log("THINGS TO UPDATE",toUpdate);
 	Character
 		.findByIdAndUpdate(req.params.id, {$set: toUpdate})
 		.then(character => res.status(204).end())

@@ -4,10 +4,8 @@
 
 //functions to navigate to character creation page
 function watchNewCharButtonClick(){
-	console.log( 'watchNewCharButtonClick ran')
 	$('#new-character-button').on('click', function(event){
 		event.preventDefault();
-		console.log('new char button clicked')
 		window.location.href = "create-character.html";
 		
 })}
@@ -15,50 +13,18 @@ function watchNewCharButtonClick(){
 function watchCreateCharacterSubmit(){
 	$('#create-character-button').on('click', function(){
 		event.preventDefault();
-		console.log('youclicked the button');
+		let createdFields={};
+		['class', 'level', 'strength', 'name','race', 'dexterity', 'intelligence', 'wisdom', 'charisma', 'constitution', 'hitPoints', 'experiencePoints', 'inventory', 'gold', 'background', 'alignment'].forEach(function(item) {
+  			createdFields[item]= $('#'+ item).val(); 
+ 		})
         let sendName = $('#name').val();
-        let sendRace = $('#race').val();
-        let sendClass= $('#class').val();
-        let sendLevel = $('#level').val();
-        let sendStrength = $('#strength').val();
-        let sendDexterity = $('#dexterity').val();
-        let sendIntelligence = $('#intelligence').val();
-        let sendWisdom = $('#wisdom').val();
-        let sendCharisma=$('#charisma').val();
-        let sendConstitution=$('#constitution').val();
-        let sendProficiencies=$('#proficiencies').val();
-        let sendHitPoints=$('#hitPoints').val();
-        let sendExperiencePoints=$('#experiencePoints').val();
-        let sendInventory=$('#inventory').val();
-        let sendGold=$('#gold').val();
-        let sendBackground=$('#background').val();
-        let sendAlignment=$('#alignment').val();
-        console.log("send name is", sendName)
         if(sendName===""){
 				alert("You must enter a name")
 			}
           else($.ajax({
                     url: 'http://localhost:8080/characterSheets',
-                    type: 'POST',   //type is any HTTP method
-                    data: {
-                		name: sendName,
-						race: sendRace,
-						class: sendClass,
-						level: sendLevel, 
-						strength: sendStrength,
-						dexterity: sendDexterity,
-						intelligence: sendIntelligence,
-						wisdom: sendWisdom,
-						charisma: sendCharisma,
-						constitution: sendConstitution,
-						proficiencies: sendProficiencies,
-						hitPoints: sendHitPoints,
-						experiencePoints: sendExperiencePoints,
-						inventory: sendInventory,
-						gold: sendGold,
-						background: sendBackground,
-						alignment: sendAlignment
-                    },      //Data as js object
+                    type: 'POST', 
+                    data: createdFields
                 })
           .then(function () {
                 window.location.href = "view-character-list.html"}))
@@ -80,12 +46,10 @@ function loadViewCharacters(){
 }
 
 function getCharacterData(callback){
-	console.log('getCharacterData ran')
 	$.getJSON('http://localhost:8080/characterSheets', callback);
 	watchViewSingleCharacter();
 }
 function displayCharacterNames(data){
-	console.log('displayCharacterNames ran', 'data.response is', data.characters)
 	const results = data.characters.map((item,index)=> renderCharacterNameResult(item));
 	$('.character-names').html('')
 	$('.character-names').append(results);
@@ -94,7 +58,6 @@ function displayCharacterNames(data){
 }
 
 function renderCharacterNameResult(result){
-	console.log("renderCharacterNameResult ran");
 	return `
 		<div class='character-name col-5' id="${result.id}">
 			<h6 id="${result.id}">${result.name}</h6>
@@ -105,12 +68,9 @@ function renderCharacterNameResult(result){
 }
 
 function watchViewCharactersButtonClick(){
-	console.log( 'watchNewCharButtonClick ran');
 	$('#view-characters-button').on('click', function(event){
 		event.preventDefault();
 		window.location.href = "view-character-list.html";
-		console.log('view chars button clicked')		
-		// window.location.href.concat('#id') res.body.character[4].id
 	})
 }
 
@@ -120,7 +80,6 @@ let clickedCharacterId = "";
 let clickedCharacterInformation=[];
 
 function setClickedCharId(){
-		console.log("setClickedCharId ran")
 	    clickedCharacterId=`${event.target.id}`;
 	    try { localStorage.setItem("clickedCharacterId", clickedCharacterId) } 
 		catch(e) { console.log("error",e) }
@@ -128,12 +87,10 @@ function setClickedCharId(){
 
 }
 function goToViewCharacterSheet(){
-	console.log("goToViewCharacterSheet ran")
 	window.location.href = "character-sheet.html";
 
 }
 function watchViewSingleCharacter(){
-	console.log("watchViewCharacter ran")
     		$('.character-name').click(function(event){
     			setClickedCharId()
     			
@@ -143,7 +100,6 @@ function watchViewSingleCharacter(){
 
 
 function setUpdateFields(callback){
-	console.log('populateUpdateFields ran', clickedCharacterId)
 	$.getJSON(`http://localhost:8080/characterSheets/${clickedCharacterId}`, callback);
 
 }
@@ -164,12 +120,7 @@ function getClickedCharacterInfo(callback){
 
 
 function populateUpdateCharacterFields(result){
-	console.log("populateUpdateCharacterFields is running.... result is", result)
-	console.log(result ==="undefined");
-
 	const decodeJSON=result;
-	console.log(decodeJSON);
-
 	$('.selected-character-name').html(
 		`<h1>${decodeJSON.name}</h1>`)
 
@@ -205,7 +156,6 @@ function populateUpdateCharacterFields(result){
 function watchUpdateCharacterSubmit(){
 	$('#update-characters-button').on('click', function(){
 		event.preventDefault();
-		console.log('youclicked the button');
 		let selectedCharId = localStorage.getItem('clickedCharacterId');
 
 
@@ -214,7 +164,6 @@ let updatableFields={};
   updatableFields[item]= $('#'+ item).val(); 
  })
 		
-        console.log("updatableFields is", updatableFields)
         $.ajax({
                     url: `http://localhost:8080/characterSheets/${selectedCharId}`,
                     type: 'PUT',   
