@@ -6,7 +6,7 @@
 function watchNewCharButtonClick(){
 	$('#new-character-button').on('click', function(event){
 		event.preventDefault();
-		window.location.href = "create-character.html";
+		window.location.href = "/create-character.html";
 		
 })}
 
