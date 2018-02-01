@@ -63,17 +63,28 @@ h2.logo.homepage{
 	width:100%;
 }
 
+input{
+	width:100%;
+}
+
 .newCharacter{
 	
 	font-family: 'Crimson Text', serif;
+	text-align: center;
+	margin-left: 20px,
+	margin-right:20px;
 
 }
 
-.row.create-new-character-form{
-	column-count: 2;
-	column-gap: 0px;
-	
+.newCharacter.col-6.partOne{
+	float:right;
+	margin-left: 20px,
+	margin-right:20px;
+}
 
+.newCharacter.col-6.partTwo{
+	margin-left: 20px,
+	margin-right:20px;
 }
 
 .create-character-page-button{

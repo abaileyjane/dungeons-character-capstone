@@ -16,7 +16,7 @@ const {Character}=require('./models');
 
 app.get("/",(req, res)=>{
 	
-	res.sendFile(__dirname+'/public/homepage.html');
+	res.sendFile(__dirname+'/index.html');
 
 });
 
