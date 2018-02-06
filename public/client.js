@@ -30,7 +30,7 @@ function watchCreateCharacterSubmit(){
 				alert("You must enter a name")
 			}
           else($.ajax({
-                    url: 'http://localhost:8080/characterSheets',
+                    url: 'https://git.heroku.com/safe-savannah-74595.git/characterSheets',
                     type: 'POST', 
                     data: createdFields
                 })
@@ -54,7 +54,7 @@ function loadViewCharacters(){
 }
 
 function getCharacterData(callback){
-	$.getJSON('http://localhost:8080/characterSheets', callback);
+	$.getJSON('https://git.heroku.com/safe-savannah-74595.git/characterSheets', callback);
 	watchViewSingleCharacter();
 }
 function displayCharacterNames(data){
@@ -108,7 +108,7 @@ function watchViewSingleCharacter(){
 
 
 function setUpdateFields(callback){
-	$.getJSON(`http://localhost:8080/characterSheets/${clickedCharacterId}`, callback);
+	$.getJSON(`https://git.heroku.com/safe-savannah-74595.git/characterSheets/${clickedCharacterId}`, callback);
 
 }
 
@@ -123,7 +123,7 @@ function loadUpdateCharacter(){
 
 function getClickedCharacterInfo(callback){
 	let selectedCharId = localStorage.getItem('clickedCharacterId');
-	$.getJSON(`http://localhost:8080/characterSheets/${selectedCharId}`, callback);
+	$.getJSON(`https://git.heroku.com/safe-savannah-74595.git/characterSheets/${selectedCharId}`, callback);
 }
 
 
@@ -173,7 +173,7 @@ let updatableFields={};
  })
 		
         $.ajax({
-                    url: `http://localhost:8080/characterSheets/${selectedCharId}`,
+                    url: `https://git.heroku.com/safe-savannah-74595.git/characterSheets/${selectedCharId}`,
                     type: 'PUT',   
                     data: updatableFields
   
@@ -198,7 +198,7 @@ viewOtherCharactersButtonClick();
 function deleteCharacter(){
 		let selectedCharId = localStorage.getItem('clickedCharacterId');
     	$.ajax({
-    		url: `http://localhost:8080/characterSheets/${selectedCharId}`,
+    		url: `https://git.heroku.com/safe-savannah-74595.git/characterSheets/${selectedCharId}`,
     		type:'DELETE'
     	})
     	.then(function(){
