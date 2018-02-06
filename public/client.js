@@ -1,12 +1,20 @@
+//I am using absolute path to make sure we get the correct url
+//path is only available on the server side (node), so I added script tags to handle it
+//This is not ideal. Ideally use 'browserify' http://browserify.org/#install
+/// it will make node package available on the browser
+const __dirname = path.resolve();
+const createCharacterUrl = path.join(__dirname + "public/create-character.html");
+const viewCharacterUrl = path.join(__dirname + "public/view-character-list.html");
 
 
+//Your ajax requests cannot come from localhost but from heroku if that's where you deployed it
 //functions for homepage
 
 //functions to navigate to character creation page
 function watchNewCharButtonClick(){
 	$('#new-character-button').on('click', function(event){
 		event.preventDefault();
-		window.location.href = "/create-character.html";
+		window.location.href = createCharacterUrl ;
 		
 })}
 
@@ -27,14 +35,14 @@ function watchCreateCharacterSubmit(){
                     data: createdFields
                 })
           .then(function () {
-                window.location.href = "view-character-list.html"}))
+                window.location.href = viewCharacterUrl }))
 })}
 
 
 
 //functions to navigate to view characters page
 function goToViewCharacters(){
-	window.location.href = "view-character-list.html";
+  window.location.href = viewCharacterUrl; 
 
 }
 
@@ -70,7 +78,7 @@ function renderCharacterNameResult(result){
 function watchViewCharactersButtonClick(){
 	$('#view-characters-button').on('click', function(event){
 		event.preventDefault();
-		window.location.href = "view-character-list.html";
+    window.location.href = viewCharacterUrl;
 	})
 }
 

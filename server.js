@@ -4,10 +4,10 @@ const bodyParser=require('body-parser');
 const jsonParser=bodyParser.json();
 const formParser= bodyParser.urlencoded({extended: false});
 const mongoose=require('mongoose');
-
+const path = require('path');
 mongoose.Promise=global.Promise;
 
-app.use(express.static('public'));
+app.use('/public', express.static(path.join(__dirname, 'public')));
 app.use(jsonParser);
 
 const {PORT, DATABASE_URL} = require('./config');
