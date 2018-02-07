@@ -30,7 +30,7 @@ function watchCreateCharacterSubmit(){
 				alert("You must enter a name")
 			}
           else($.ajax({
-                    url: 'https://git.heroku.com/safe-savannah-74595.git/characterSheets',
+                    url: 'https://safe-savannah-74595.herokuapp.com/characterSheets',
                     type: 'POST', 
                     data: createdFields
                 })
@@ -54,7 +54,7 @@ function loadViewCharacters(){
 }
 
 function getCharacterData(callback){
-	$.getJSON('https://git.heroku.com/safe-savannah-74595.git/characterSheets', callback);
+	$.getJSON('https://safe-savannah-74595.herokuapp.com/characterSheets', callback);
 	watchViewSingleCharacter();
 }
 function displayCharacterNames(data){
@@ -108,7 +108,7 @@ function watchViewSingleCharacter(){
 
 
 function setUpdateFields(callback){
-	$.getJSON(`https://git.heroku.com/safe-savannah-74595.git/characterSheets/${clickedCharacterId}`, callback);
+	$.getJSON(`https://safe-savannah-74595.herokuapp.com/characterSheets/${clickedCharacterId}`, callback);
 
 }
 
@@ -123,7 +123,7 @@ function loadUpdateCharacter(){
 
 function getClickedCharacterInfo(callback){
 	let selectedCharId = localStorage.getItem('clickedCharacterId');
-	$.getJSON(`https://git.heroku.com/safe-savannah-74595.git/characterSheets/${selectedCharId}`, callback);
+	$.getJSON(`https://safe-savannah-74595.herokuapp.com/characterSheets/${selectedCharId}`, callback);
 }
 
 
@@ -173,7 +173,7 @@ let updatableFields={};
  })
 		
         $.ajax({
-                    url: `https://git.heroku.com/safe-savannah-74595.git/characterSheets/${selectedCharId}`,
+                    url: `https://safe-savannah-74595.herokuapp.com/characterSheets/${selectedCharId}`,
                     type: 'PUT',   
                     data: updatableFields
   
@@ -198,7 +198,7 @@ viewOtherCharactersButtonClick();
 function deleteCharacter(){
 		let selectedCharId = localStorage.getItem('clickedCharacterId');
     	$.ajax({
-    		url: `https://git.heroku.com/safe-savannah-74595.git/characterSheets/${selectedCharId}`,
+    		url: `https://safe-savannah-74595.herokuapp.com/characterSheets/${selectedCharId}`,
     		type:'DELETE'
     	})
     	.then(function(){
