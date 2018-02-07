@@ -2,10 +2,12 @@
 //path is only available on the server side (node), so I added script tags to handle it
 //This is not ideal. Ideally use 'browserify' http://browserify.org/#install
 /// it will make node package available on the browser
-const __dirname = path.resolve();
-const createCharacterUrl = path.join(__dirname + "public/create-character.html");
-const viewCharacterUrl = path.join(__dirname + "public/view-character-list.html");
-
+// const __dirname = path.resolve();
+// const createCharacterUrl = path.join(__dirname + "public/create-character.html");
+// const viewCharacterUrl = path.join(__dirname + "public/view-character-list.html");
+const viewCharactersUrl = "/public/view-character-list.html"
+const createCharacterUrl ="/public/create-character.html"
+const singleCharacterUrl= "/public/character-sheet.html"
 
 //Your ajax requests cannot come from localhost but from heroku if that's where you deployed it
 //functions for homepage
@@ -35,14 +37,14 @@ function watchCreateCharacterSubmit(){
                     data: createdFields
                 })
           .then(function () {
-                window.location.href = viewCharacterUrl }))
+                window.location.href = viewCharactersUrl }))
 })}
 
 
 
 //functions to navigate to view characters page
 function goToViewCharacters(){
-  window.location.href = viewCharacterUrl; 
+  window.location.href = viewCharactersUrl; 
 
 }
 
@@ -78,7 +80,7 @@ function renderCharacterNameResult(result){
 function watchViewCharactersButtonClick(){
 	$('#view-characters-button').on('click', function(event){
 		event.preventDefault();
-    window.location.href = viewCharacterUrl;
+    window.location.href = viewCharactersUrl;
 	})
 }
 
@@ -91,11 +93,11 @@ function setClickedCharId(){
 	    clickedCharacterId=`${event.target.id}`;
 	    try { localStorage.setItem("clickedCharacterId", clickedCharacterId) } 
 		catch(e) { console.log("error",e) }
-		window.location.href = "character-sheet.html";
+		window.location.href = singleCharacterUrl;
 
 }
 function goToViewCharacterSheet(){
-	window.location.href = "character-sheet.html";
+	window.location.href = singleCharacterUrl;
 
 }
 function watchViewSingleCharacter(){
