@@ -5,10 +5,13 @@ const jsonParser=bodyParser.json();
 const formParser= bodyParser.urlencoded({extended: false});
 const mongoose=require('mongoose');
 const path = require('path');
+const cors = require('cors');
 mongoose.Promise=global.Promise;
 
 app.use('/public', express.static(path.join(__dirname, 'public')));
 app.use(jsonParser);
+app.use(cors());
+//temp before i set up my environ to differentiate twn prod and dev
 
 const {PORT, DATABASE_URL} = require('./config');
 const {Character}=require('./models');
