@@ -141,24 +141,24 @@ function populateUpdateCharacterFields(result){
 		`
 		<div class="col-3"><p></p></div>
 		<form  id="updateCharacterPart1" class="col-3 newCharacter partOne" name="update-character">
-				Character Name<br><input class="" type="text" name="name" label="name" value="${decodeJSON.name}" id="name" ><br>
-				Class<br><input class="" type="text" name="class" label="class" value="${decodeJSON.class}" id="class" ><br>
-				Race<br><input class="" type="text" name="race" label="race"  value="${decodeJSON.race}" id="race" ><br>
-				Level<br><input class="" type="number" name="level" label="level"  value="${decodeJSON.level}" id="level" ><br>
-				Background<br><input class="" type="string" name="background" label="background" value="${decodeJSON.background}" id="background" ><br>
-				Alignment<br><input class="" type="string" name="alignment" label="alignment" value="${decodeJSON.alignment}" id="alignment" ><br>
-				Experience Points<br><input class="" type="number" name="experiencePoints" label="experiencePoints" value="${decodeJSON.experiencePoints}" id="experiencePoints" ><br>
-				Hit Points<br><input class="" type="number" name="hitPoints" label="hitPoints" value="${decodeJSON.hitPoints}" id="hitPoints" ><br>
+				Character Name<br><input class="" type="text" name="name" label="name" value="${decodeJSON.name}" id="name" ><br><br>
+				Class<br><input class="" type="text" name="class" label="class" value="${decodeJSON.class}" id="class" ><br><br>
+				Race<br><input class="" type="text" name="race" label="race"  value="${decodeJSON.race}" id="race" ><br><br>
+				Level<br><input class="" type="number" name="level" label="level"  value="${decodeJSON.level}" id="level" ><br><br>
+				Background<br><input class="" type="string" name="background" label="background" value="${decodeJSON.background}" id="background" ><br><br>
+				Alignment<br><input class="" type="string" name="alignment" label="alignment" value="${decodeJSON.alignment}" id="alignment" ><br><br>
+				Experience Points<br><input class="" type="number" name="experiencePoints" label="experiencePoints" value="${decodeJSON.experiencePoints}" id="experiencePoints" ><br><br>
+				Hit Points<br><input class="" type="number" name="hitPoints" label="hitPoints" value="${decodeJSON.hitPoints}" id="hitPoints" ><br><br>
 		</form>
 		<form  id="updateCharacterPart2" class="col-3 newCharacter partTwo" name="update-character">
-				Strength<br><input class="" type="number" name="strength" label="strength" value="${decodeJSON.strength}" id="strength" ><br> 
-				Dexterity<br><input class="" type="number" name="dexterity" label="dexterity" value="${decodeJSON.dexterity}" id="dexterity" ><br>
-				Constitution<br><input class="" type="number" name="constitution" label="constitution" value="${decodeJSON.constitution}" id="constitution" ><br>
-				Intelligence<br><input class="" type="number" name="intelligence" label="intelligence" value="${decodeJSON.intelligence}" id="intelligence" ><br>
-				Wisdom<br><input class="" type="number" name="wisdom" label="wisdom" value="${decodeJSON.wisdom}" id="wisdom" ><br>
-				Charisma<br><input class="" type="number" name="charisma" label="charisma" value="${decodeJSON.charisma}" id="charisma" ><br>
-				Inventory<br><input class="" type="string" name="inventory" label="inventory" value="${decodeJSON.inventory}"  id="inventory" ><br>
-				Gold<br><input class="" type="number" name="gold" label="gold" value="${decodeJSON.gold}"  id="gold" ><br>
+				Strength<br><input class="" type="number" name="strength" label="strength" value="${decodeJSON.strength}" id="strength" ><br> <br>
+				Dexterity<br><input class="" type="number" name="dexterity" label="dexterity" value="${decodeJSON.dexterity}" id="dexterity" ><br><br>
+				Constitution<br><input class="" type="number" name="constitution" label="constitution" value="${decodeJSON.constitution}" id="constitution" ><br><br>
+				Intelligence<br><input class="" type="number" name="intelligence" label="intelligence" value="${decodeJSON.intelligence}" id="intelligence" ><br><br>
+				Wisdom<br><input class="" type="number" name="wisdom" label="wisdom" value="${decodeJSON.wisdom}" id="wisdom" ><br><br>
+				Charisma<br><input class="" type="number" name="charisma" label="charisma" value="${decodeJSON.charisma}" id="charisma" ><br><br>
+				Inventory<br><input class="" type="string" name="inventory" label="inventory" value="${decodeJSON.inventory}"  id="inventory" ><br><br>
+				Gold<br><input class="" type="number" name="gold" label="gold" value="${decodeJSON.gold}"  id="gold" ><br><br>
 
 					
 			</form>
