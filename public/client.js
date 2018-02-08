@@ -125,12 +125,13 @@ function loadUpdateCharacter(){
 
 function getClickedCharacterInfo(callback){
 	let selectedCharId = localStorage.getItem('clickedCharacterId');
+	if(selectedCharId){
 	$.getJSON(`https://safe-savannah-74595.herokuapp.com/characterSheets/${selectedCharId}`, callback);
-}
+}}
 
 
 function populateUpdateCharacterFields(result){
-	const decodeJSON=result;
+	const decodeJSON=result || {};
 	$('.selected-character-name').html(
 		`<h1>${decodeJSON.name}</h1>`)
 
@@ -138,9 +139,8 @@ function populateUpdateCharacterFields(result){
 	
 	$('.update-character').html(
 		`
-		
-
-		<form  id="updateCharacter" class="col-6 newCharacter" name="update-character" method="put" action="/characterSheets/"ID>
+		<div class="col-3"><p></p></div>
+		<form  id="updateCharacterPart1" class="col-3 newCharacter partOne" name="update-character">
 				Character Name<br><input class="" type="text" name="name" label="name" value="${decodeJSON.name}" id="name" ><br>
 				Class<br><input class="" type="text" name="class" label="class" value="${decodeJSON.class}" id="class" ><br>
 				Race<br><input class="" type="text" name="race" label="race"  value="${decodeJSON.race}" id="race" ><br>
@@ -149,6 +149,8 @@ function populateUpdateCharacterFields(result){
 				Alignment<br><input class="" type="string" name="alignment" label="alignment" value="${decodeJSON.alignment}" id="alignment" ><br>
 				Experience Points<br><input class="" type="number" name="experiencePoints" label="experiencePoints" value="${decodeJSON.experiencePoints}" id="experiencePoints" ><br>
 				Hit Points<br><input class="" type="number" name="hitPoints" label="hitPoints" value="${decodeJSON.hitPoints}" id="hitPoints" ><br>
+		</form>
+		<form  id="updateCharacterPart2" class="col-3 newCharacter partTwo" name="update-character">
 				Strength<br><input class="" type="number" name="strength" label="strength" value="${decodeJSON.strength}" id="strength" ><br> 
 				Dexterity<br><input class="" type="number" name="dexterity" label="dexterity" value="${decodeJSON.dexterity}" id="dexterity" ><br>
 				Constitution<br><input class="" type="number" name="constitution" label="constitution" value="${decodeJSON.constitution}" id="constitution" ><br>
