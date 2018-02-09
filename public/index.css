@@ -5,6 +5,11 @@ body {
 	padding:10px;
 }
 
+button:hover{
+	background-color: #dee5da;
+	cursor:crosshair;
+}
+
 .content{
 	border: solid 10px #92140C;
 	background-color: #fff8f0;
@@ -41,15 +46,19 @@ h2.logo.homepage{
 }
 
 .button.homepage{
+	font-weight: bold;
 	text-align:center;
 	font-family: 'Julius Sans One', sans-serif;
 	height:30px;
 	margin:5px;
+	font-size: 65%;
 }
 
 .row.buttons{
+	font-weight:bold;
 	margin:0 auto;
 	float:right;
+	
 }
 
 .description{
@@ -92,6 +101,8 @@ input{
 	font-family: 'Julius Sans One', sans-serif;
 	height:30px;
 	margin:5px;
+	font-weight: bold;
+	font-size: 65%
 }
 
 .update-character-page-button{
@@ -99,6 +110,8 @@ input{
 	font-family: 'Julius Sans One', sans-serif;
 	height:30px;
 	margin:5px;
+	font-weight: bold;
+	font-size: 65%
 }
 
 .content.create-character-page{
@@ -124,14 +137,7 @@ h4{
 	font-size: 18px
 }
 
-.character-names{
 
-
-}
-
-.update-character{
-
-}
 
 h6{
 	font-family: 'Julius Sans One', sans-serif;
@@ -149,8 +155,13 @@ h5{
 	border:solid 10px #430a06;
 	margin-top: 0px;
 	margin-bottom:20px;
-	background-color: #eaeaeb
+	background-color: #eaeaeb;
 	margin-right:20px;
+}
+
+.character-name:hover{
+	background-color: #dee5da;
+	cursor:crosshair;
 }
 
 .button.charListPage{
@@ -161,6 +172,8 @@ h5{
 	font-family: 'Julius Sans One', sans-serif;
 	height:30px;
 	width:25%;
+	font-weight: bold;
+	font-size: 65%
 }
 
 .row.col-12.button-row{
@@ -174,4 +187,6 @@ h5{
 	text-align:center;
 	font-family: 'Julius Sans One', sans-serif;
 	height:30px;
+	font-weight: bold;
+	font-size: 65%
 }
