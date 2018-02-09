@@ -1,16 +1,9 @@
-//I am using absolute path to make sure we get the correct url
-//path is only available on the server side (node), so I added script tags to handle it
-//This is not ideal. Ideally use 'browserify' http://browserify.org/#install
-/// it will make node package available on the browser
-// const __dirname = path.resolve();
-// const createCharacterUrl = path.join(__dirname + "public/create-character.html");
-// const viewCharacterUrl = path.join(__dirname + "public/view-character-list.html");
+
 const viewCharactersUrl = "/public/view-character-list.html"
 const createCharacterUrl ="/public/create-character.html"
 const singleCharacterUrl= "/public/character-sheet.html"
 
-//Your ajax requests cannot come from localhost but from heroku if that's where you deployed it
-//functions for homepage
+
 
 //functions to navigate to character creation page
 function watchNewCharButtonClick(){
@@ -116,12 +109,11 @@ function setUpdateFields(callback){
 
 
 function loadUpdateCharacter(){
-	$(window).on("load", function(){
+		
 		getClickedCharacterInfo(populateUpdateCharacterFields);
 
 		}
-	)
-}
+	
 
 function getClickedCharacterInfo(callback){
 	let selectedCharId = localStorage.getItem('clickedCharacterId');
@@ -165,6 +157,11 @@ function populateUpdateCharacterFields(result){
 			`)
 }
 
+function successPopup(){
+	console.log('popup ran');
+	$.toast('Save Successful');
+}
+
 function watchUpdateCharacterSubmit(){
 	$('#update-characters-button').on('click', function(){
 		event.preventDefault();
@@ -183,9 +180,9 @@ let updatableFields={};
   
                        
                 })
-          .then(function () {
-                alert("Character Saved")
-			})
+       		
+          	.then(loadUpdateCharacter)
+          	.then(successPopup)
 })}
 
 
@@ -225,8 +222,9 @@ watchCreateCharacterSubmit();
 watchNewCharButtonClick();
 watchViewCharactersButtonClick();
 loadViewCharacters();
-// characterNameClick();
-loadUpdateCharacter();
+$(window).on("load", function(){
+	loadUpdateCharacter();
+})
 deleteCharacterButtonClick();
 watchViewSingleCharacter();
 watchUpdateCharacterSubmit();
