@@ -25,7 +25,7 @@ function watchCreateCharacterSubmit(){
 				alert("You must enter a name")
 			}
           else($.ajax({
-                    url: 'https://safe-savannah-74595.herokuapp.com/characterSheets',
+                    url: 'https://dragons-horde-92.herokuapp.com/characterSheets',
                     type: 'POST', 
                     data: createdFields
                 })
@@ -49,7 +49,7 @@ function loadViewCharacters(){
 }
 
 function getCharacterData(callback){
-	$.getJSON('https://safe-savannah-74595.herokuapp.com/characterSheets', callback);
+	$.getJSON('https://dragons-horde-92.herokuapp.com/characterSheets', callback);
 	watchViewSingleCharacter();
 }
 function displayCharacterNames(data){
@@ -103,7 +103,7 @@ function watchViewSingleCharacter(){
 
 
 function setUpdateFields(callback){
-	$.getJSON(`https://safe-savannah-74595.herokuapp.com/characterSheets/${clickedCharacterId}`, callback);
+	$.getJSON(`https://dragons-horde-92.herokuapp.com/characterSheets/${clickedCharacterId}`, callback);
 
 }
 
@@ -118,7 +118,7 @@ function loadUpdateCharacter(){
 function getClickedCharacterInfo(callback){
 	let selectedCharId = localStorage.getItem('clickedCharacterId');
 	if(selectedCharId){
-	$.getJSON(`https://safe-savannah-74595.herokuapp.com/characterSheets/${selectedCharId}`, callback);
+	$.getJSON(`https://dragons-horde-92.herokuapp.com/characterSheets/${selectedCharId}`, callback);
 }}
 
 
@@ -174,7 +174,7 @@ let updatableFields={};
  })
 		
         $.ajax({
-                    url: `https://safe-savannah-74595.herokuapp.com/characterSheets/${selectedCharId}`,
+                    url: `https://dragons-horde-92.herokuapp.com/characterSheets/${selectedCharId}`,
                     type: 'PUT',   
                     data: updatableFields
   
@@ -199,7 +199,7 @@ viewOtherCharactersButtonClick();
 function deleteCharacter(){
 		let selectedCharId = localStorage.getItem('clickedCharacterId');
     	$.ajax({
-    		url: `https://safe-savannah-74595.herokuapp.com/characterSheets/${selectedCharId}`,
+    		url: `https://dragons-horde-92.herokuapp.com/characterSheets/${selectedCharId}`,
     		type:'DELETE'
     	})
     	.then(function(){

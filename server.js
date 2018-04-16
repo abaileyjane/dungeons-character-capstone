@@ -110,7 +110,8 @@ app.put('/characterSheets/:id', formParser, (req, res)=>{
     }
   });
 	Character
-		.findByIdAndUpdate(req.params.id, {$set: toUpdate})
+		.findOne(req.params.id)
+		.update({$set: toUpdate})
 		.then(character => res.status(204).end())
 		.catch(err => res.status(500).json({message:'Internal Server Error'}))
 })
